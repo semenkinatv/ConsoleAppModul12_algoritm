@@ -6,25 +6,26 @@ namespace ConsoleAppModul12_algoritm
 {
     class Program
      {
-       static void Main(string[] args)
+        static void Main(string[] args)
         {
             List<User> listUser = new List<User>();
 
             Console.WriteLine("Создайте список пользователей.");
             var Str = "";
             do
-            {   var user = new User();
+            {
+                var user = new User();
                 Console.WriteLine("\r\nВведите Login пользователя.  Для завершения списка введите stop.");
                 Str = Console.ReadLine();
 
                 if (Str != "stop")
-                { 
+                {
                     user.Login = Str;
 
-                    Console.WriteLine("Введите Name");
+                    Console.WriteLine("Введите Name:");
                     user.Name = Console.ReadLine();
 
-                    Console.WriteLine("Если пользователь имеет премиум-подписки введите ДА");
+                    Console.WriteLine("Если пользователь имеет премиум-подписки, введите ДА:");
                     var prem = Console.ReadLine();
                     if (prem.ToLower() == "да")
                     {
@@ -40,14 +41,30 @@ namespace ConsoleAppModul12_algoritm
             }
             while (Str.ToLower() != "stop");
 
-            foreach (User u in listUser)
+            while (true)
             {
-                Console.WriteLine($"\r\nДобрый день, {u.Name}");
-                if (u.IsPremium == false)
+                Console.WriteLine("\r\nАвторизуйтесь (введите ваш Login):");
+                Str = Console.ReadLine();
+                var fExist = 0;
+
+                foreach (User u in listUser)
                 {
-                    ShowAds();
+                    if (u.Login == Str)
+                    {
+                        fExist = 1;
+                        Console.WriteLine($"\r\nДобрый день, {u.Name}");
+                        if (u.IsPremium == false)
+                        {
+                            ShowAds();
+                        }
+                    }
                 }
-            }         
+
+                if (fExist == 0)
+                {
+                    Console.WriteLine($"Пользователя с логином {Str} не существует в списке.");
+                }
+            }
         }
 
         static void ShowAds()
