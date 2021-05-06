@@ -13,8 +13,7 @@ namespace ConsoleAppModul12_algoritm
             Console.WriteLine("Создайте список пользователей.");
             var Str = "";
             do
-            {
-                var user = new User();
+            {   var user = new User();
                 Console.WriteLine("\r\nВведите Login пользователя.  Для завершения списка введите stop.");
                 Str = Console.ReadLine();
 
